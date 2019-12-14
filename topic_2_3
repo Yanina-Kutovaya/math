@@ -1,0 +1,229 @@
+import numpy as np
+import matplotlib.pyplot as plt
+import math
+
+# Практическое задание к теме 2
+# Задание 1.2 Напишите код на Python, реализующий расчет длины вектора, заданного его координатами. (в программе)
+
+print('Ввод координат вектора')
+n = int(input('Введите размерность вектора: '))
+
+sum = 0
+for i in range(n):
+    v = float(input(f'Введите {i + 1} координату: '))
+    sum += v ** 2
+
+print('Длина вектора: ', np.sqrt(sum))
+
+# Задание 3 Напишите код на Python, реализующий построение графиков:
+# 1) окружность
+x = np.linspace(-4, 4, 1000)
+y1 = np.sqrt(16 - x ** 2)
+y2 = -np.sqrt(16 - x ** 2)
+plt.axes().set_aspect('equal')
+plt.plot(x, y1)
+plt.plot(x, y2)
+plt.xlabel('x')
+plt.ylabel('y')
+
+plt.show()
+
+# 2) эллипс
+x = np.linspace(-4, 4, 1000)
+a = 4
+b = 2
+y1 = b * np.sqrt(1 - x ** 2 / a ** 2)
+y2 = -b * np.sqrt(1 - x ** 2 / a ** 2)
+plt.axes().set_aspect('equal')
+plt.plot(x, y1)
+plt.plot(x, y2)
+plt.xlabel('x')
+plt.ylabel('y')
+
+plt.show()
+
+# 3) гипербола
+x = np.linspace(-4, 4, 1000)
+a = 2
+b = 1
+y1 = b * np.sqrt(x ** 2 / a ** 2 - 1)
+y2 = -b * np.sqrt(x ** 2 / a ** 2 - 1)
+plt.axes().set_aspect('equal')
+plt.plot(x, y1)
+plt.plot(x, y2)
+plt.xlabel('x')
+plt.ylabel('y')
+
+plt.show()
+
+# Задание 5.1 Нарисуйте трехмерный график двух параллельных плоскостей
+from pylab import *
+from mpl_toolkits.mplot3d import Axes3D
+
+fig = figure()
+ax = Axes3D(fig)
+
+X = np.arange(-5, 5, 0.5)
+Y = np.arange(-5, 5, 0.5)
+
+X, Y = np.meshgrid(X, Y)
+
+Z = X + 2 * Y
+Z2 = X + 2 * Y - 20
+
+ax.plot_wireframe(X, Y, Z)
+ax.plot_wireframe(X, Y, Z2)
+ax.scatter(0, 0, 0, 'z', 50, 'red')
+show()
+
+# Задание 5.2 Нарисуйте трехмерный график двух любых поверхностей второго порядка
+
+fig = figure()
+ax = Axes3D(fig)
+
+X = np.arange(-5, 5, 0.5)
+Y = np.arange(-5, 5, 0.5)
+
+X, Y = np.meshgrid(X, Y)
+
+Z = X**2 + Y**2
+
+ax.plot_surface(X, Y, Z)
+
+ax.scatter(0, 0, 0, 'z', 50, 'red')
+show()
+
+fig = figure()
+ax = Axes3D(fig)
+
+X = np.arange(-5, 5, 0.5)
+Y = np.arange(-5, 5, 0.5)
+
+X, Y = np.meshgrid(X, Y)
+
+Z = np.sqrt(X**2 + Y**2)
+
+ax.plot_surface(X, Y, Z)
+ax.scatter(0, 0, 0, 'z', 50, 'red')
+show()
+
+# Практическое задание к теме 3
+# Задание 1 Нарисуйте график функции: y(x) = k∙cos(x – a) + b для некоторых (2-3 различных) значений параметров k, a, b
+x = np.linspace(0, 10, 100)
+k = [1, 1.5]
+a = [-2, 3]
+b = [-1, 0.5]
+
+
+plt.plot(x, k[0] * np.cos(x - a[0] + b[0]), label='v1')
+plt.plot(x, k[1] * np.cos(x - a[1] + b[1]), label='v2')
+plt.legend(loc='best')
+plt.show()
+
+# Задание 3.1 Напишите код, который будет переводить полярные координаты в декартовы.
+def polar_to_cartesian(radius, angle):
+    x = np.round(radius * np.cos(angle), 1)
+    y = np.round(radius * np.sin(angle), 1)
+    return f'Декартовы координаты данной точки {(x, y)}'
+
+
+print('Введите полярные координаты')
+radius = float(input('Введите радиус: '))
+angle = float(input('Введите угол в радианах: '))
+
+print(polar_to_cartesian(radius, angle))
+
+
+# Задание 3.2 Напишите код, который будет рисовать график окружности в полярных координатах.
+def circle_graph(r):
+    angle = np.linspace(0, 2 * np.pi, 100)
+    radius = np.linspace(r, r, 100)
+    plt.polar(angle, radius)
+    plt.show()
+
+
+r = float(input('Введите радиус окружности: '))
+circle_graph(r)
+
+# Задание 3.3 Напишите код, который будет рисовать график отрезка прямой линии в полярных координатах.
+def line_polar(x1, y1, x2, y2):
+    a = x2 - x1
+    b = y2 - y1
+    r = math.sqrt(a ** 2 + b ** 2)
+    theta = math.atan(b / a)
+    angle = np.linspace(theta, theta, 100)
+    radius = np.linspace(0, r, 100)
+    plt.polar(angle, radius)
+    plt.show()
+
+
+x1 = float(input('Введите абсциссу начала отрезка в декартовых координатах: '))
+y1 = float(input('Введите ординату начала отрезка в декартовых координатах: '))
+x2 = float(input('Введите абсциссу конца отрезка в декартовых координатах: '))
+y2 = float(input('Введите ординату конца отрезка в декартовых координатах: '))
+line_polar(x1, y1, x2, y2)
+
+# Задание 4.1 Решите систему уравнений:
+# y = x^2 – 1
+# exp(x) + x∙(1 – y) = 1
+
+from scipy.optimize import fsolve
+
+def equations(p):
+    x, y = p
+    return (x**2 - 1 - y, np.exp(x) + x * (1 - y) - 1)
+
+a = [-2, 0, 2, 4]
+
+result = []
+for i in a:
+    (x1, y1) = fsolve(equations, (i, i))
+    result.append((x1, y1))
+
+print(result)
+
+
+
+# Задание 4.2 Решите систему уравнений и неравенств:
+# y = x^2 – 1
+# exp(x) + x∙(1 – y) > 1
+
+
+def equations(p):
+    x, y = p
+    return (x**2 - 1 - y, np.exp(x) + x * (1 - y) - 1)
+
+def roots():
+    a = [-2, 0, 2, 4 ]
+    result = []
+    for i in a:
+        (x1, y1) = fsolve(equations, (i, i))
+        result.append((x1, y1))
+    return result
+
+def f(x):
+    y = x ** 2 - 1
+    return np.exp(x) + x * (1 - y) - 1 > 0
+
+result = roots()
+
+a = 'x: '
+b = 'y: '
+for i in range(len(result)):
+    x0 = str(np.round(result[i-1][0], 2))
+    x1 = str(np.round(result[i][0], 2))
+    y0 = str(np.round(result[i-1][1], 2))
+    y1 = str(np.round(result[i][1], 2))
+    if f(result[i][0] - 0.1):
+        if i == 0:
+            a += f'(-oo,{x1}) '
+            b += f'(-oo,{y1}) '
+        else:
+            a += f'U ({x0}, {x1}) '
+            b += f'U ({y0}, {y1}) '
+else:
+    if f(result[i][0] + 0.1):
+        a += f'U ({x1},+oo)'
+        b += f'U ({y1},+oo)'
+print(a)
+print(b)
