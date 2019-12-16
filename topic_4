@@ -1,0 +1,20 @@
+# Задание 4. Решите аналитически и потом численно (в программе) уравнение, зависящее от параметра а:
+# sin(а*x)=0
+# при условии: 0.01<a<0.02, 100<х<500.
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+
+a1 = np.linspace(0.01, 0.02, 100)
+a2 = np.linspace(np.pi/250, 0.02, 100)
+a3 = np.linspace(3*np.pi/500, 0.02, 100)
+
+plt.plot(a1, np.pi/a1, label='x = pi / a')
+plt.plot(a2, 2 * np.pi/a2, label='x = 2pi / a')
+plt.plot(a3, 3 * np.pi/a3, label='x = 3pi / a')
+plt.legend(bbox_to_anchor=(1, 1), bbox_transform=plt.gcf().transFigure)
+plt.ylabel('x')
+plt.xlabel('a')
+plt.title('Решения уравнения sin(а*x)=0')
+plt.show()
