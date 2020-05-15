@@ -1,0 +1,30 @@
+# Даны три множества a,b и с. Необходимо выполнить все изученные виды бинарных операций над всеми комбинациями множеств.
+
+import itertools
+
+a = {1, 2, 3, 4, 5, 6}
+b = {2, 4, 6, 8, 10, 12}
+c = {3, 6, 9, 12, 15, 18}
+
+print('Пересечение а и b, b и a: ', set(a).intersection(set(b)))
+print('Пересечение а и с, c и a: ', set(a).intersection(set(c)))
+print('Пересечение b и с, c и b: ', set(b).intersection(set(c)))
+
+print('Объединение а и b, b и a: ', set(a).union(set(b)))
+print('Объединение а и с, c и a: ', set(a).union(set(c)))
+print('Объединение b и с, c и b: ', set(b).union(set(c)))
+
+print('Разность а и b: ', set(a).difference(set(b)))
+print('Разность b и a: ', set(b).difference(set(a)))
+print('Разность а и c: ', set(a).difference(set(c)))
+print('Разность c и a: ', set(c).difference(set(a)))
+print('Разность b и c: ', set(b).difference(set(c)))
+print('Разность c и b: ', set(c).difference(set(b)))
+
+print('Симметрическая разность а и b, b и a: ', set(a).symmetric_difference(set(b)))
+print('Симметрическая разность а и с, с и a: ', set(a).symmetric_difference(set(c)))
+print('Симметрическая разность b и с, с и b: ', set(b).symmetric_difference(set(c)))
+
+print('Декартово произведение а и b, b и a: ', [(x, y) for x, y in itertools.product(a, b)])
+print('Декартово произведение а и c, c и a: ', [(x, y) for x, y in itertools.product(a, c)])
+print('Декартово произведение b и c, c и b: ', [(x, y) for x, y in itertools.product(b, c)])
