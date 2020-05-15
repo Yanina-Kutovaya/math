@@ -1,17 +1,15 @@
 # 3. На языке Python предложить алгоритм вычисляющий численно предел с точностью 10^(-7)
 # 4. Предложить оптимизацию алгоритма, полученного в задании 3, ускоряющую его сходимость.
 
-import math
 from math import factorial, exp, log
-from decimal import Decimal
 
 
 def f(n):
-    return n/Decimal(exp((1/n) * log(factorial(n))))
+    return n / exp((1 / n) * log(factorial(n)))
 
 
 epsilon = 0.0000001
 i = 2
-while f(i) - f(i-1) > epsilon:
+while f(i) - f(i - 1) > epsilon:
     i += 1000
 print(f(i))
